@@ -3,11 +3,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+// 1. Importar las rutas 🚗
+const vehicleRoutes = require('./routes/vehicleRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+
+// 2. Conectar las rutas con la app 🛣️
+app.use('/api/vehicles', vehicleRoutes);
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -20,4 +26,3 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.error('Error al conectar a la base de datos:', error);
     });
-    
