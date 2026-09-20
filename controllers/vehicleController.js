@@ -10,6 +10,24 @@ const getVehicles = async (req, res) => {
     }
 };
 
+// Crear un nuevo vehículo
+const createVehicle = async (req, res) => {
+    try {
+        const newVehicle = new Vehicle(req.body);
+        await newVehicle.save();
+        res.status(201).json({
+            message: 'Vehículo registrado exitosamente',
+            vehicle: newVehicle
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: 'Error al registrar el vehículo',
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
-    getVehicles
+    getVehicles,
+    createVehicle
 };
