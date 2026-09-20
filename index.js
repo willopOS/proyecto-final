@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-// 1. Importar las rutas 🚗
+// Importar las rutas
 const vehicleRoutes = require('./routes/vehicleRoutes');
+const clientRoutes = require('./routes/clientRoutes');
+const saleRoutes = require('./routes/saleRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -12,8 +14,10 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-// 2. Conectar las rutas con la app 🛣️
+// Conectar las rutas con la app
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/sales', saleRoutes);
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGO_URI)
