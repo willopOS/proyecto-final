@@ -3,7 +3,6 @@ import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, Route, BrowserRouter as Router, Routes, useNavigate } from 'react-router-dom';
 import ClientList from './components/ClientList';
 import Login from './components/Login';
-import VehicleList from './components/VehicleList';
 
 // Separamos el contenido en un componente interno para poder usar useNavigate()
 function AppContent() {
@@ -69,7 +68,7 @@ function AppContent() {
       <Container className="mt-4">
         <Routes>
           <Route path="/" element={<h2>Bienvenido al Panel de Control</h2>} />
-          <Route path="/vehiculos" element={<VehicleList />} />
+          <Route path="/vehiculos" element={<h2>Módulo de Vehículos (Pronto)</h2>} />
           <Route path="/clientes" element={<ClientList />} />
           <Route path="/ventas" element={<h2>Módulo de Ventas (Pronto)</h2>} />
           <Route path="/login" element={<Login />} />
