@@ -41,7 +41,35 @@ const createSale = async (req, res) => {
     }
 };
 
+// Actualizar una venta
+const updateSale = async (req, res) => {
+    try {
+        const ventaActualizada = await Sale.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!ventaActualizada) {
+            return res.status(404).json({ message: "Venta no encontrada" });
+        }
+        res.json(ventaActualizada);
+    } catch (error) {
+        res.status(500).json({ message: "Error al actualizar la venta", error: error.message });
+    }
+};
+
+// Eliminar una venta
+const deleteSale = async (req, res) => {
+    try {
+        const ventaEliminada = await Sale.findByIdAndDelete(req.params.id);
+        if (!ventaEliminada) {
+            return res.status(404).json({ message: "Venta no encontrada" });
+        }
+        res.json({ message: "Venta eliminada exitosamente" });
+    } catch (error) {
+        res.status(500).json({ message: "Error al eliminar la venta", error: error.message });
+    }
+};
+
 module.exports = {
     getSales,
-    createSale
+    createSale,
+    updateSale,
+    deleteSale
 };
