@@ -8,12 +8,16 @@
     "seed": "node seeds/loadSeeds.js"
   },
   "dependencies": {
+    "axios": "^1.20.0",
     "bcryptjs": "^3.0.3",
-    "cors": "^2.8.5",
+    "bootstrap": "^5.3.8",
+    "cors": "^2.8.6",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^8.3.1"
+    "mongoose": "^8.3.1",
+    "react-bootstrap": "^2.10.10",
+    "react-router-dom": "^7.18.4"
   }
 }

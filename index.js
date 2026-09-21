@@ -7,13 +7,13 @@ require('dotenv').config();
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const saleRoutes = require('./routes/saleRoutes');
-// Importar ruta de autenticación
 const authRoutes = require('./routes/authRoutes');
 
-
+// Inicializar la aplicación
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Middlewares globales
 app.use(cors());
 app.use(express.json());
 
@@ -21,11 +21,9 @@ app.use(express.json());
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/sales', saleRoutes);
-
-// Usar ruta de autenticación
 app.use('/api/auth', authRoutes);
 
-// Conexión a MongoDB
+// Conexión a MongoDB y arranque del servidor
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('Base de datos conectada con éxito 🚀');
