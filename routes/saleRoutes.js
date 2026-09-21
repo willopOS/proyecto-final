@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { getSales } = require('../controllers/saleController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { getSales, createSale } = require('../controllers/saleController');
+const { verifyToken, isAdmin } = require('../middlewares/authMiddleware');
 
-// Ruta protegida: Solo accesible con un token válido
+// Consultar todas las ventas (requiere sesión iniciada)
 router.get('/', verifyToken, getSales);
+
+// Registrar una nueva venta (solo administradores) 👑
+router.post('/', verifyToken, isAdmin, createSale);
 
 module.exports = router;

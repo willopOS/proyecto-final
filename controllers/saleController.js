@@ -1,4 +1,5 @@
 const Sale = require('../models/Sale');
+const Vehicle = require('../models/Vehicle');
 
 // Obtener todas las ventas con vehículo y cliente completos
 const getSales = async (req, res) => {
@@ -13,6 +14,34 @@ const getSales = async (req, res) => {
     }
 };
 
+const createSale = async (req, res) => {
+    try {
+        const { idVenta, vehiculoVendido, clienteAsociado, metodoPago, fechaEntrega } = req.body;
+
+        // Guardar la nueva venta
+        const newSale = new Sale({
+            idVenta,
+            vehiculoVendido,
+            clienteAsociado,
+            metodoPago,
+            fechaEntrega,
+            fechaVenta: new Date()
+        });
+        await newSale.save();
+
+        // Cambiar automáticamente el estado del coche
+        await Vehicle.findByIdAndUpdate(vehiculoVendido, { estadoVehiculo: 'Vendido' });
+
+        res.status(201).json({
+            message: 'Venta registrada con éxito y vehículo marcado como Vendido',
+            sale: newSale
+        });
+    } catch (error) {
+        res.status(400).json({ message: 'Error al registrar la venta', error: error.message });
+    }
+};
+
 module.exports = {
-    getSales
+    getSales,
+    createSale
 };
