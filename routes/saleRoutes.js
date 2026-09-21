@@ -10,9 +10,9 @@ router.get('/', verifyToken, getSales);
 router.post('/', verifyToken, isAdmin, createSale);
 
 // Actualizar una venta (solo administradores)
-router.put('/:id', updateSale);
+router.put('/:id', verifyToken, isAdmin, updateSale);
 
 // Eliminar una venta (solo administradores)
-router.delete('/:id', deleteSale);
+router.delete('/:id', verifyToken, isAdmin, deleteSale);
 
 module.exports = router;
