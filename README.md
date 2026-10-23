@@ -368,8 +368,8 @@ Crear o configurar el archivo .env con las variables necesarias:
 
 ```env
 PORT=4000
-MONGO_URI=mongodb+srv://willopju93_db_user:Jfc4JrBCki59nOY7@cluster0.vknmede.mongodb.net/concesionario_final?retryWrites=true&w=majority
-JWT_SECRET=clave_secreta_super_segura_jwt_2026
+MONGO_URI=<OCULTO>
+JWT_SECRET=<OCULTO>
 ```
 
 Iniciar el backend:
