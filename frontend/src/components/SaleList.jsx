@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Alert, Button, Container, Table } from 'react-bootstrap';
+import api from '../axiosConfig';
 import SaleFormModal from './SaleFormModal';
 
 const SaleList = () => {
@@ -14,9 +14,7 @@ const SaleList = () => {
             const token = localStorage.getItem('token');
             if (!token) return setError('No estás autenticado.');
             
-            const response = await axios.get('http://localhost:4000/api/sales', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await api.get('/sales');
             setSales(response.data);
         } catch (err) {
             setError('Error al cargar las ventas.');
@@ -29,10 +27,8 @@ const SaleList = () => {
     const eliminarVenta = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este registro de venta?')) {
             try {
-                const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:4000/api/sales/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                await api.delete(`/sales/${id}`);
+                
                 setSales(sales.filter((s) => s._id !== id));
                 alert('✅ Venta eliminada');
                 } catch (err) {

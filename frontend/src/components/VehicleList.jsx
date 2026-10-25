@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Alert, Button, Container, Table } from 'react-bootstrap';
+import api from '../axiosConfig';
 import VehicleFormModal from './VehicleFormModal';
 
 const VehicleList = () => {
@@ -14,9 +14,8 @@ const VehicleList = () => {
             const token = localStorage.getItem('token');
             if (!token) return setError('No estás autenticado.');
             
-            const response = await axios.get('http://localhost:4000/api/vehicles', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await api.get('/vehicles');
+
             setVehicles(response.data);
         } catch (err) {
             setError('Error al cargar los vehículos.');
@@ -29,10 +28,8 @@ const VehicleList = () => {
     const eliminarVehiculo = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este vehículo?')) {
             try {
-                const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:4000/api/vehicles/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                await api.delete(`/vehicles/${id}`);
+                
                 setVehicles(vehicles.filter((v) => v._id !== id));
                 alert('✅ Vehículo eliminado');
             } catch (err) {

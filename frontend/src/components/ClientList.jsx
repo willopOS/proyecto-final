@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Alert, Button, Container, Table } from 'react-bootstrap';
+import api from '../axiosConfig';
 import ClientFormModal from './ClientFormModal';
 
 const ClientList = () => {
@@ -18,17 +18,15 @@ const ClientList = () => {
                 setError('No estás autenticado. Por favor, inicia sesión.');
                 return;
             }
-            const response = await axios.get('http://localhost:4000/api/clients', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+
+            const response = await api.get('/clients');
             setClients(response.data);
         } catch (err) {
             setError('Error al cargar los clientes desde el servidor.');
             console.error(err);
         }
-    };
+    }
 
-    // useEffect ahora está DEBAJO de obtenerClientes para que no marque error
     useEffect(() => {
         obtenerClientes();
     }, []);
@@ -36,10 +34,7 @@ const ClientList = () => {
     const eliminarCliente = async (id) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
             try {
-                const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:4000/api/clients/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                await api.delete(`/clients/${id}`);
                 setClients(clients.filter((client) => client._id !== id));
                 alert('✅ Cliente eliminado satisfactoriamente');
             } catch (err) {
