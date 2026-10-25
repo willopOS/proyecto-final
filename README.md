@@ -290,7 +290,7 @@ Tambien se utilizan hooks de React y React Router, entre ellos:
 - useState para gestionar el estado de formularios, listas, errores y modales.
 - useEffect para realizar cargas iniciales y sincronizar los formularios cuando cambia el registro seleccionado.
 - useNavigate para la navegacion programatica dentro de la aplicacion.
-
+- `axiosConfig.js` para centralizar la configuración de peticiones HTTP, definiendo la URL base de la API mediante la variable de entorno `VITE_API_URL`, lo que facilita la transición fluida entre el entorno de desarrollo y producción.
 ---
 
 ## 🎨 UX/UI
@@ -401,6 +401,17 @@ npm run dev
 ```
 
 La interfaz se ejecutara en el entorno de desarrollo configurado por el proyecto.
+
+---
+
+## 🚀 Despliegue en Producción
+
+El proyecto se encuentra desplegado y completamente funcional en la nube, utilizando un enfoque de despliegue continuo (CI/CD) conectado al repositorio principal.
+
+- **Frontend (Interfaz Web):** Alojado en **Vercel**. Puedes acceder a la aplicación en vivo aquí: `https://proyecto-final-ten-umber.vercel.app`
+- **Backend (API REST):** Alojado en **Render**, operando como un Web Service de Node.js.
+- **Base de Datos:** Cluster en la nube gestionado con **MongoDB Atlas**.
+- **Seguridad:** Las credenciales y claves maestras (como `MONGO_URI` y `JWT_SECRET`) están protegidas mediante variables de entorno en las plataformas de despliegue.
 
 ---
 
