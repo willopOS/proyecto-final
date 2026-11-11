@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
-import api from '../api/axiosConfig';
+import api from '../axiosConfig';
 
 const SaleFormModal = ({ show, handleClose, saleToEdit, refreshSales }) => {
     const [vehiculoVendido, setVehiculoVendido] = useState('');
