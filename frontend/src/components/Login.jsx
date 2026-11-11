@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import api from '../axiosConfig';
 
 const Login = () => {
   // Estados para guardar lo que el usuario escribe
@@ -17,7 +17,7 @@ const Login = () => {
         setError('');
 
         try {
-        const response = await axios.post('http://localhost:4000/api/auth/login', {
+        const response = await api.post('/auth/login', {
             email,
             password
         });

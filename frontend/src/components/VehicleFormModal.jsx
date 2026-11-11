@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import api from '../axiosConfig';
 
 const VehicleFormModal = ({ show, handleClose, vehicleToEdit, refreshVehicles }) => {
     // Todos los campos basados en tu modelo real
@@ -48,10 +48,10 @@ const VehicleFormModal = ({ show, handleClose, vehicleToEdit, refreshVehicles })
             };
 
             if (vehicleToEdit) {
-                await axios.put(`http://localhost:4000/api/vehicles/${vehicleToEdit._id}`, vehicleData, config);
+                await api.put(`/vehicles/${vehicleToEdit._id}`, vehicleData, config);
                 alert('✅ Vehículo actualizado con éxito');
             } else {
-                await axios.post('http://localhost:4000/api/vehicles', vehicleData, config);
+                await api.post('/vehicles', vehicleData, config);
                 alert('✅ Vehículo registrado con éxito');
             }
 

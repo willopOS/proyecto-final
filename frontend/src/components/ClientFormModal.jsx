@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import api from '../axiosConfig';
 
 const ClientFormModal = ({ show, handleClose, clientToEdit, refreshClients }) => {
   // Estados para los campos del formulario
@@ -34,7 +34,7 @@ const ClientFormModal = ({ show, handleClose, clientToEdit, refreshClients }) =>
             if (clientToEdit) {
                 // MODO EDITAR: Solo enviamos los datos modificables
                 const clientData = { nombreCliente, email, preferenciasCliente };
-                await axios.put(`http://localhost:4000/api/clients/${clientToEdit._id}`, clientData, config);
+                await api.put(`/clients/${clientToEdit._id}`, clientData, config);
                 alert('✅ Cliente actualizado con éxito');
             } else {
                 // MODO CREAR: Generamos un idCliente aleatorio o basado en la fecha para cumplir con el backend
@@ -47,7 +47,7 @@ const ClientFormModal = ({ show, handleClose, clientToEdit, refreshClients }) =>
                     email,
                     preferenciasCliente
                 };
-                await axios.post('http://localhost:4000/api/clients', newClientData, config);
+                await api.post('/clients', newClientData, config);
                 alert('✅ Cliente creado con éxito');
             }
 

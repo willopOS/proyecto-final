@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import api from '../api/axiosConfig';
 
 const SaleFormModal = ({ show, handleClose, saleToEdit, refreshSales }) => {
     const [vehiculoVendido, setVehiculoVendido] = useState('');
@@ -22,8 +22,8 @@ const SaleFormModal = ({ show, handleClose, saleToEdit, refreshSales }) => {
                 
                 // Pedimos ambas listas al mismo tiempo
                 const [resClientes, resVehiculos] = await Promise.all([
-                    axios.get('http://localhost:4000/api/clients', config),
-                    axios.get('http://localhost:4000/api/vehicles', config)
+                    api.get('/clients', config),
+                    api.get('/vehicles', config)
                 ]);
                 
                 setListaClientes(resClientes.data);
@@ -56,11 +56,11 @@ const SaleFormModal = ({ show, handleClose, saleToEdit, refreshSales }) => {
             const saleData = { vehiculoVendido, clienteAsociado, fechaVenta, metodoPago, fechaEntrega };
 
             if (saleToEdit) {
-                await axios.put(`http://localhost:4000/api/sales/${saleToEdit._id}`, saleData, config);
+                await api.put(`/sales/${saleToEdit._id}`, saleData, config);
                 alert('✅ Venta actualizada con éxito');
             } else {
                 const idVenta = Math.floor(Math.random() * 100000);
-                await axios.post('http://localhost:4000/api/sales', { idVenta, ...saleData }, config);
+                await api.post('/sales', { idVenta, ...saleData }, config);
                 alert('✅ Venta registrada con éxito');
             }
             refreshSales();
